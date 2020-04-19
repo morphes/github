@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h3>{{ date }}</h3>
+    <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#SHA</th>
+        <th scope="col">Author</th>
+        <th scope="col">Message</th>        
+        <th scope="col">Date</th>
+        <th scope="col">Link</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for commit in commits %}
+      <tr>
+        <td scope="row">{{ commit.commit.sha }}</td>
+        <td>{{ commit.commit.author.name }}</td>
+        <td>{{ commit.commit.message }}</td>        
+        <td>{{ commit.commit.author.date }}</td>
+        <td><a href="{{ commit.commit.html_url }}" target="_blank">View</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>  
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}  
+  <h2>Repository "{{repository_id}}" statistics</h2>    
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#Author</th>
+        {% for statistic_date, statistic_item in statistics.items %}
+            <th>
+              <a href="/repository/{{repository_id}}/{{statistic_date}}">
+                {{statistic_date}}
+              </a>
+            </th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for author in authors %}
+        <tr>
+          <td scope="row">{{ author }}</td>                  
+            {% for statistic_date, statistic_item in statistics.items %}
+                <td>                  
+                  {% if author in statistic_item %}                    
+                    {{ statistic_item|get_item:author }}                    
+                  {% endif %}                  
+                </td>
+            {% endfor %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  
+{% endblock %}
